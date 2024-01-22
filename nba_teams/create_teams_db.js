@@ -6,7 +6,8 @@ const connection = mysql.createConnection(config.database);
 connection.connect(function(err) {
     if (err) throw err;
     console.log('Connected!');
-    connection.query('CREATE DATABASE IF NOT EXISTS test', function(err) {
+    const query_database = 'CREATE DATABASE IF NOT EXISTS nba_teams';
+    connection.query(query_database, function(err) {
         if (err) throw err;
         console.log("Database created!");
     })
