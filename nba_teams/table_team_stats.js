@@ -46,7 +46,7 @@ fetch(apiUrl)
   .then(data => {
     connection.beginTransaction();
 
-    const query_insert = 'INSERT INTO teams (team_id, name, full_name, city, acronym, conference, division) VALUES ?';
+    const query_insert = 'INSERT INTO team_stats (game_id, home_team_id, visitor_team_id, home_team_score, visitor_team_score, season, postseason) VALUES ?';
     for (const team of data.data) {
         const values = [[team.id, team.name, team.full_name, team.city, team.abbreviation, team.conference, team.division]];
         connection.query(query_insert, [values], (error, results) => {

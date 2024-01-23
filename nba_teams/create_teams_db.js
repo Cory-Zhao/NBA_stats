@@ -1,15 +1,16 @@
-const mysql = require('mysql');
-const config = require('../config');
+const { queryAsync } = require('./dbUtils');
 
-const connection = mysql.createConnection(config.database);
+const createNbaTeamsDB = async () => {
+    try {
+        const queryCreateDatabase = 'CREATE DATABASE IF NOT EXISTS nba_teams';
+        await queryAsync(queryCreateDatabase);
 
-connection.connect(function(err) {
-    if (err) throw err;
-    console.log('Connected!');
-    const query_database = 'CREATE DATABASE IF NOT EXISTS nba_teams';
-    connection.query(query_database, function(err) {
-        if (err) throw err;
-        console.log("Database created!");
-    })
-    connection.end();
-});
+        console.log('Database created!');
+    } catch (error) {
+        console.error('Error creating database:', error);
+    }
+};
+
+module.exports = {
+  createNbaTeamsDB,
+};
